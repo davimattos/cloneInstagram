@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Gravatar } from 'react-native-gravatar';
+import { logout } from '../store/actions/user';
 
 const $bgColorButtom = '#4286f4';
 const $buttomColor = '#FFF';
@@ -42,14 +44,16 @@ const styles = StyleSheet.create({
 });
 
 class Profile extends Component {
-
   logout = () => {
-    const { navigation } = this.props;
+    const { navigation, onLogout } = this.props;
+
+    onLogout();
     navigation.navigate('Auth');
   }
 
   render() {
-    const options = { email: 'dmattos340@gmail.com', secure: true };
+    const { email } = this.props;
+    const options = { email, secure: true };
     return (
       <View style={styles.container}>
         <Gravatar options={options} style={styles.avatar} />
@@ -63,4 +67,15 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+const mapStateToProps = ({ user }) => {
+  return {
+    name: user.name,
+    email: user.email,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  onLogout: () => dispatch(logout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
