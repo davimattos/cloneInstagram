@@ -67,12 +67,11 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return {
-    name: user.name,
-    email: user.email,
-  };
-};
+const mapStateToProps = ({ user }) => ({
+  name: user.name,
+  email: user.email,
+});
+
 
 const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout()),
