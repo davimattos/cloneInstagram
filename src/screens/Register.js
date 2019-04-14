@@ -52,7 +52,7 @@ class Register extends Component {
         <TextInput
           style={styles.input}
           placeholder="Nome"
-          autoFocus={true}
+          autoFocus
           value={name}
           onChangeText={nameValue => this.setState({ name: nameValue })}
         />
@@ -66,7 +66,7 @@ class Register extends Component {
         <TextInput
           style={styles.input}
           placeholder="Password"
-          secureTextEntry={true}
+          secureTextEntry
           value={password}
           onChangeText={passwordValue => this.setState({ password: passwordValue })}
         />
