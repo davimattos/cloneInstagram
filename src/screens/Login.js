@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import { login } from '../store/actions/user';
 
 const $bgColorButtom = '#4286f4';
 const $bgColorButtomtext = '#FFF';
@@ -41,12 +43,12 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-  }
+  };
 
   login = () => {
     const { navigation } = this.props;
     navigation.navigate('Feed');
-  }
+  };
 
   render() {
     const { email, password } = this.state;
@@ -56,7 +58,7 @@ class Login extends Component {
         <TextInput
           placeholder="Email"
           style={styles.input}
-          autoFocus={true}
+          autoFocus
           keyboardType="email-address"
           value={email}
           onChangeText={emailValue => this.setState({ email: emailValue })}
@@ -64,7 +66,7 @@ class Login extends Component {
         <TextInput
           placeholder="Senha"
           style={styles.input}
-          secureTextEntry={true}
+          secureTextEntry
           value={password}
           onChangeText={passwordValue => this.setState({ password: passwordValue })}
         />
@@ -79,4 +81,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+  onLogin: user => dispatch(login(user)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
