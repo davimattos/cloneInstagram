@@ -30,7 +30,6 @@ const Comments = (props) => {
 
   Comments.propTypes = {
     comments: PropTypes.node,
-
   };
 
   Comments.defaultProps = {
